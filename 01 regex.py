@@ -2,7 +2,29 @@
 Python Tutorial: re Module - How to Write and Match Regular Expressions (Regex)
 
 link: https://www.youtube.com/watch?v=K8L6KVGG-7o
+
+cheatsheet:
+
+.       - Any Character Except New Line
+\d      - Digit (0-9)
+\D      - Word Character (a-z, A-Z, 0-9, _)
+\W      - Not a Word Character
+\s      - Whitespace (space, tab, newline)
+\S      - Not Whitespace (space, tab, newline)
+
+These anchors match invisible chars before or after chars
+
+\b      - Word Boundary (= whitespace or non-alphanumeric char)
+\B      - Not a Word Boundary
+^       - Beginning of a String
+$       - End of a String
+
+[]      - Matches Characters in brackets
+[^ ]    - Matches Characters NOT in 
+
 """
+
+
 
 #import re module
 import re
@@ -50,3 +72,30 @@ matches = pattern.finditer(text_to_search)
 
 for match in matches:
   print(match)
+  
+# search for special character such as a dot (.) with escape char (\):
+
+pattern =  re.compile(r'coreyms\.com')
+matches = pattern.finditer(text_to_search)
+for match in matches:
+  print(match)
+
+"""
+Examples of special chars from cheatsheet above:
+
+matches all chars except newline:
+pattern = re.compile(r'.') 
+matches all digits:
+pattern = re.compile(r'\d')
+matches all non-digits:
+pattern = re.compile(r'\D')
+matches all word chars:
+pattern = re.compile(r'\w')
+matches non-word chars:
+pattern = re.compile(r'\W')
+matches tabs, spaces, newlines:
+pattern = re.compile(r'\s')
+matches non-tabs, spaces, or newlines:
+pattern = re.compile(r'\S')
+ 
+"""
