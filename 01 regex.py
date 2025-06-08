@@ -20,7 +20,16 @@ These anchors match invisible chars before or after chars
 $       - End of a String
 
 []      - Matches Characters in brackets
-[^ ]    - Matches Characters NOT in 
+[^ ]    - Matches Characters NOT in brackets
+|       - Either Or
+()      - Group
+
+Quantifiers:
+*       - 0 or More
++       - 1 or More
+?       - 0 or One
+{3}     - Exact Number
+{3,4}   - Range of Numbers (Minimum, Maximum)
 
 """
 
@@ -52,6 +61,12 @@ Mr Smith
 Ms Davis
 Mrs. Robinson
 Mr. T
+
+cat
+mat
+pat
+bat
+
 '''
 
 # 1. finding matches
@@ -160,3 +175,28 @@ pattern = re.compile(r'[1-5]')
 # this works for letters as well:
 pattern = re.compile(r'[a-z]')
 pattern = re.compile(r'[a-zA-Z]')
+
+# within a character string, a carrot sign (^) negates the set and matches everything that is not in that character set.
+
+# carrot sign will match everything that is NOT uppercase or lowercase letter
+
+pattern = re.compile(r'[^a-zA-Z]')
+
+# match everything that is not a "b" and ends with "at": cat, mat, pat, but NOT bat
+
+pattern = re.compile(r'[^b]at')
+
+# 4 use quantifiers to match more than one character at once
+
+# example without quantifiers:
+pattern = re.compile(r'\d\d\d.\d\d\d.\d\d\d\d')
+
+# same exmample with quantifiers:
+pattern = re.compile(r'\d{3}.\d{3}.\d{4}')
+
+# match names with Mr. etc.
+# use question mark for optional chars
+# so here the period is optional:
+ 
+pattern = re.compile(r'Mr\.?') # 29:41
+
