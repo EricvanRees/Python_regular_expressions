@@ -43,6 +43,9 @@ coreyms.com
 
 321-555-4321
 123.555.1234
+123*555*1234
+800-555-1234
+900-555-1234
 
 Mr. Schafer
 Mr Smith
@@ -50,6 +53,8 @@ Ms Davis
 Mrs. Robinson
 Mr. T
 '''
+
+# 1. finding matches
 
 sentence = 'Start a sentence and then bring it to an end'
 
@@ -81,21 +86,77 @@ for match in matches:
   print(match)
 
 """
+# 2. pattern matching: 
+
 Examples of special chars from cheatsheet above:
 
 matches all chars except newline:
 pattern = re.compile(r'.') 
+
 matches all digits:
 pattern = re.compile(r'\d')
+
 matches all non-digits:
 pattern = re.compile(r'\D')
+
 matches all word chars:
 pattern = re.compile(r'\w')
+
 matches non-word chars:
 pattern = re.compile(r'\W')
+
 matches tabs, spaces, newlines:
 pattern = re.compile(r'\s')
+
 matches non-tabs, spaces, or newlines:
 pattern = re.compile(r'\S')
- 
+
+does NOT match the 3rd "Ha" as there is no word boundary before it:
+pattern = re.compile(r'\bHa')  
+
+Does ONLY match the 3rd "Ha":
+pattern = re.compile(r'\BHa') 
+
+Matches "Start" at beginning of string:
+pattern = re.compile(r'^Start') 
+
+matches = pattern.finditer(sentence)
+Matches "end" at end of string:
+
+pattern = re.compile(r'end$') 
+matches = pattern.finditer(sentence)
+
+match both phone numbers above using ANY separator:
+pattern = re.compile(r'\d\d\d.\d\d\d.\d\d\d\d') 
+
+find all phone numbers from text file:
+
+with open('data.text', 'r', encoding='utf-8') as f:
+  contents = f.read()
+  
+  matches = pattern.finditer(contents)
+  
+  for match in matches:
+    print(match)
+    
 """
+
+# 3 Character sets use square brackets (=[]) to find a match
+
+# find a dash or a dot
+ 
+pattern = re.compile(r'\d\d\d[-.]\d\d\d[-.]\d\d\d\d')
+
+# you do not need to escape a dot or dash inside a character set as they have slightly different rules
+
+# a character set to match only 800 and 900 numbers:
+# first char set looks for 8 or 9 at the beginning, followed by two literal zeros:
+
+pattern = re.compile(r'[89][00][-.]\d\d\d[-.]\d\d\d\d')
+
+# match digits within a specified range, using a dash:
+pattern = re.compile(r'[1-5]')
+
+# this works for letters as well:
+pattern = re.compile(r'[a-z]')
+pattern = re.compile(r'[a-zA-Z]')
