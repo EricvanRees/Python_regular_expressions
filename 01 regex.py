@@ -192,7 +192,7 @@ pattern = re.compile(r'[^b]at')
 # example without quantifiers:
 pattern = re.compile(r'\d\d\d.\d\d\d.\d\d\d\d')
 
-# same exmample with quantifiers:
+# same example with quantifiers:
 pattern = re.compile(r'\d{3}.\d{3}.\d{4}')
 
 # match names with Mr., Mr, etc.
