@@ -7,7 +7,8 @@ cheatsheet:
 
 .       - Any Character Except New Line
 \d      - Digit (0-9)
-\D      - Word Character (a-z, A-Z, 0-9, _)
+\D      - Any char which is NOT a digital digit
+\w      - Word Character (a-z, A-Z, 0-9, _)
 \W      - Not a Word Character
 \s      - Whitespace (space, tab, newline)
 \S      - Not Whitespace (space, tab, newline)
@@ -194,9 +195,35 @@ pattern = re.compile(r'\d\d\d.\d\d\d.\d\d\d\d')
 # same exmample with quantifiers:
 pattern = re.compile(r'\d{3}.\d{3}.\d{4}')
 
-# match names with Mr. etc.
+# match names with Mr., Mr, etc.
 # use question mark for optional chars
 # so here the period is optional:
+# * = matches zero or more word chars
  
-pattern = re.compile(r'Mr\.?') # 29:41
+pattern = re.compile(r'Mr\.?\s[A-Z]\w*')
+
+# 5 Groups - using () - allow to match for several different patterns 
+
+# match for Mrs. and Ms
+pattern = re.compile(r'Mr(r|s|rs)\.?\s[A-Z]\w*')
+# same thing but more readable:
+pattern = re.compile(r'(Mr|Ms|Mrs)\.?\s[A-Z]\w*')
+
+'''
+Exercise: write a regex that matches all these emails:
+
+CoreyMSchafer@gmail.com
+corey.schafer@university.edu
+corey-321-schafer@my-work.net
+
+1st email address:
+pattern = re.compile(r'[a-zA-Z]+@[a-zA-Z]+\.com')
+
+2nd email address:
+pattern = re.compile(r'[a-zA-Z.]+@[a-zA-Z]+\.(com|edu)') 
+
+3rd email address:
+pattern = re.compile(r'[a-zA-Z0-9.-]+@[a-zA-Z-]+\.(com|edu|net)') 
+'''
+
 
