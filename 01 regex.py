@@ -226,4 +226,40 @@ pattern = re.compile(r'[a-zA-Z.]+@[a-zA-Z]+\.(com|edu)')
 pattern = re.compile(r'[a-zA-Z0-9.-]+@[a-zA-Z-]+\.(com|edu|net)') 
 '''
 
+# 6 How to capture information from groups
 
+urls = '''
+https://www.google.com
+http://coreyms.com
+https://youtube.com
+https://www.nasa.gov
+'''
+# this re catches all 4 domain names above, including the ones without "www":
+# the question mark makes the "s" before it optional
+# use a group () to make "www" optional:
+# pattern = re.compile(r'https?://(www\.)?')
+
+# this matches all domain links + their names
+# w+ means one or more word chars:
+pattern = re.compile(r'https?://(www\.)?\w+\.\w+')
+
+# capture domain name + top level domain (.com or .gov)
+# step 1: include groups using parentheses so you have now 3 different groups inside one regular expression + group zero which includes everything captured
+# pattern = re.compile(r'https?://(www\.)?(\w+)(\.\w+)')
+
+
+matches = pattern.finditer(urls)
+
+# sub method substitutes each match with only two groups of the entire match
+# this is a way to standardize urls
+# it takes a substitution url with references to the groups you want to use for the substition url, and a string
+subbed_urls =  pattern.sub(r'\2\3', urls)
+
+# when printed, it shows the substitutions made
+print(subbed_urls)
+
+""" for match in matches:
+  # pass in index number to show desired group (0-3):
+  print(match.group(0)) """
+  
+  
