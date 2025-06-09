@@ -247,7 +247,6 @@ pattern = re.compile(r'https?://(www\.)?\w+\.\w+')
 # step 1: include groups using parentheses so you have now 3 different groups inside one regular expression + group zero which includes everything captured
 # pattern = re.compile(r'https?://(www\.)?(\w+)(\.\w+)')
 
-
 matches = pattern.finditer(urls)
 
 # sub method substitutes each match with only two groups of the entire match
@@ -262,4 +261,27 @@ print(subbed_urls)
   # pass in index number to show desired group (0-3):
   print(match.group(0)) """
   
-  
+# 7 Other methods
+
+# 1) findall method, only returns matches as a list of strings, contrary to finditer which returns matches with extra information and functionality
+# it findall matches groups, it will return only groups
+# if there is more than one group, it returns a tuple with all groups
+
+# 2) match method
+# match will determine if the regular expression matches at the beginning of the string
+# only returns the first match, if there's no match it returns None
+
+# 3) search method
+# for matches in the entire string, not just at the beginning as with match
+# only returns the first match it finds, or None if there's no match
+
+# 8 flags
+# the following is very inconvenient for searching both lowercase and uppercase letters at the same time:
+# pattern = re.compile(r'[Ss][Tt][Aa][Rr][Tt]')
+# instead, use a flag to ignore case:
+#pattern = re.compile(r'start', re.IGNORECASE)
+# this is the same, but shorter:
+pattern = re.compile(r'start', re.I)
+
+
+
